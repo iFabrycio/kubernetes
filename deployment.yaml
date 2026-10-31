@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: web-deployment
 spec:
   replicas: 3
   selector:
@@ -22,17 +22,17 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: web-config
-                  key: APP_NAME
+                  key: app_name
             - name: APP_ENV
               valueFrom:
                 configMapKeyRef:
                   name: web-config
-                  key: APP_ENV
+                  key: app_env
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: web-secret
-                  key: DB_PASSWORD
+                  name: db-secret
+                  key: password
           volumeMounts:
             - name: pagina
               mountPath: /usr/share/nginx/html
